@@ -1,0 +1,91 @@
+{% extends "base.html" %}
+{% load i18n staticfiles mezzanine_tags blog_tags %}
+
+{% block meta_title %}{% trans "Home" %}{% endblock %}
+{% block title_wrapper%}
+{% endblock %}
+{% block all_content %}
+{% block left_wrapper%}
+{% endblock %}
+
+{% block main_wrapper%}
+
+{% endblock %}
+
+{% block right_wrapper%}
+{% endblock %}
+
+
+<div class="greenwave-statement">
+	<div class="container">
+		<div class="row">
+			<div class="col-md-6 col-md-offset-3">
+				<p class="text-center">
+					In this paragraph, Greenwave will state their value proposition to environmental advocates, donors, and innovator/entrepreneur types. -Stating the "what" and "why they should care."
+				</p>
+					<p class="text-center"><a class="greenbtn" href="/support">Join + Give</a></p>
+			</div>
+		</div>
+	</div>
+</div>
+<div class="stories-ideas">
+	<div class="container">
+		<div class="row">
+	 		<div class="col-lg-10 col-lg-offset-1">
+				<h1>STORIES AND IDEAS</h1>
+				<div class="blog-content">
+					{% blog_recent_posts 3 as recent_posts %}
+			 		{% if recent_posts %}
+			 			<!-- <h4>{% trans "Stories And Ideas" %}</h4> -->
+			 			{% for recent_post in recent_posts %}
+			 			<div class="col-lg-4 blog-post">
+							<h2><a href="{{ recent_post.get_absolute_url }}">{{ recent_post.title }}</a></h2>
+							<p>{{ recent_post.description }}</p>
+						</div>
+			 			{% endfor %}
+			 		{% endif %}
+			 		<div class="col-lg-2">
+				 		<p><a class="greenbtn" href="/blog">Read Blog</a></p>
+				 	</div>
+			 	</div> <!-- /blog content -->
+			</div> <!-- /column -->
+		</div> <!-- /row -->
+	</div> <!-- /container -->
+</div> <!-- /stories-ideas -->
+<!-- the nav bar gets broken if this section gets taken out -->
+<div id="portfoliowrap">
+  <div class="portfolio-centered">
+    <div class="recentitems portfolio">
+			<div class="portfolio-item ">
+			</div><!-- end col-12 -->
+    </div><!-- portfolio -->
+  </div><!-- portfolio container -->
+</div><!--/Portfoliowrap -->
+
+
+<script>
+
+var mn = $(".main-nav");
+    mns = "main-nav-scrolled";
+    hdr = $('header').height();
+
+$(window).scroll(function() {
+  if( $(this).scrollTop() > hdr ) {
+    mn.addClass(mns);
+  } else {
+    mn.removeClass(mns);
+  }
+});
+
+// Can also be used with $(document).ready()
+$(window).load(function() {
+  $('.flexslider').flexslider({
+    animation: "slide"
+  });
+});
+
+</script>
+
+{% endblock %}
+
+

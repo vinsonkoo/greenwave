@@ -1,0 +1,408 @@
+<!doctype html>
+<html lang="{{ LANGUAGE_CODE }}"{% if LANGUAGE_BIDI %} dir="rtl"{% endif %}>
+{% load pages_tags mezzanine_tags i18n future staticfiles %}
+
+<head>
+<meta http-equiv="Content-type" content="text/html; charset=utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="keywords" content="{% block meta_keywords %}{% endblock %}">
+<meta name="description" content="{% block meta_description %}{% endblock %}">
+<title>{% block meta_title %}{% endblock %}{% if settings.SITE_TITLE %} | {{ settings.SITE_TITLE }}{% endif %}</title>
+<link rel="shortcut icon" href="{% static "img/favicon.ico" %}">
+
+{% ifinstalled mezzanine.blog %}
+<link rel="alternate" type="application/rss+xml" title="RSS" href="{% url "blog_post_feed" "rss" %}">
+<link rel="alternate" type="application/atom+xml" title="Atom" href="{% url "blog_post_feed" "atom" %}">
+{% endifinstalled %}
+
+{% compress css %}
+<link rel="stylesheet" href="{% static "css/bootstrap.css" %}">
+<link rel="stylesheet" href="{% static "css/mezzanine.css" %}">
+<link rel="stylesheet" href="{% static "css/flexslider.css" %}">
+<link rel="stylesheet" href="{% static "css/accordion.css" %}">
+
+
+ <link href="{% static "css/font-awesome.min.css" %}" rel="stylesheet" type="text/css" />
+	
+    <link href="{% static "css/style.css" %}" rel="stylesheet">
+
+
+
+<link href='http://fonts.googleapis.com/css?family=Open+Sans:400,700,600,800' rel='stylesheet' type='text/css'>
+{% if LANGUAGE_BIDI %}
+<link rel="stylesheet" href="{% static "css/rtl.css" %}">
+{% endif %}
+{% ifinstalled cartridge.shop %}
+<link rel="stylesheet" href="{% static "css/cartridge.css" %}">
+{% if LANGUAGE_BIDI %}
+<link rel="stylesheet" href="{% static "css/cartridge.rtl.css" %}">
+{% endif %}
+{% endifinstalled %}
+{% block extra_css %}{% endblock %}
+{% endcompress %}
+
+{% compress js %}
+<script src="{% static "mezzanine/js/"|add:settings.JQUERY_FILENAME %}"></script>
+<script src="{% static "js/bootstrap.js" %}"></script>
+<script src="{% static "js/bootstrap-extras.js" %}"></script>
+{% block extra_js %}{% endblock %}
+{% include "includes/footer_scripts.html" %}
+{% endcompress %}
+
+<!--[if lt IE 9]>
+<script src="{% static "js/html5shiv.js" %}"></script>
+<script src="{% static "js/respond.min.js" %}"></script>
+<![endif]-->
+
+{% block extra_head %}{% endblock %}
+</head>
+
+<body id="{% block body_id %}page-top{% endblock %}">
+{% block intro %}
+<header>
+	<div class="col-lg-8 col-lg-offset-2">
+		<div class="flexslider">
+	    <ul class="slides">
+	    	<li>
+    	    <img src="{% static "img/slide01.jpg" %}" class="">
+    		</li>
+    		<li>
+    	    <img src="{% static "img/slide02.jpg" %}" class="">
+    		</li>
+    		<li>
+    	    <img src="{% static "img/slide03.jpg" %}" class="">
+    		</li>
+	    </ul>
+	  </div>
+	</div>
+</header>
+
+{% endblock %}
+
+<div class="main-nav navbar navbar-default " role="navigation">
+	<div class="container">
+		<div class="navbar-header">
+	    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+	        <span class="sr-only">{% trans "Toggle Navigation" %}</span>
+	        <span class="icon-bar"></span>
+	        <span class="icon-bar"></span>
+	        <span class="icon-bar"></span>
+	    </button>
+	    {% if settings.SITE_TITLE %}
+	    	<a class="navbar-brand logo" href="/"><img src="{% static "img/logo.png" %}"></a>
+	    {% else %}
+	    	<a class="logo" href="/"><img src="{% static "img/logo.png" %}"></a>
+	    {% endif %}
+	    {% if settings.SITE_TAGLINE %}<p class="navbar-text visible-lg">{{ settings.SITE_TAGLINE }}</p>{% endif %}
+		</div>
+		<div class="navbar-collapse collapse navbar-right">
+	    
+	    {% page_menu "pages/menus/dropdown.html" %}
+		</div>
+	</div>
+</div>
+
+<div class="main">
+{% block title_wrapper%}
+{% if request.get_full_path == "/support/" %}
+<div id="" class="pg-header jumpstart">
+{% else %}
+<div id="" class="pg-header">
+{% endif %}
+    <div class="container">
+			<div class="row">
+				<div class="col-md-8 col-md-offset-2">
+						<!-- if statements to change the title of the page, otherwise the title of the page will coincide with the same name as in the navbar for the same page -->
+						<!-- what we do section of nav -->
+						{% if request.get_full_path ==  "/what-we-do/organization/" %}
+							<h2 class="text-center green-text">Who We Are | Learning About GreenWave</h2>
+						{% elif request.get_full_path ==  "/what-we-do/case-studies/" %}
+							<h2 class="text-center green-text">What GreenWave Has Been Up To</h2>
+						{% elif request.get_full_path ==  "/what-we-do/3d-restorative-farm/" %}
+							<h2 class="text-center green-text">3D Restorative Farm: How It Works</h2>
+						<!-- community section of nav -->
+						{% elif request.get_full_path ==  "/community/" %}
+							<h2 class="text-center green-text">The Movement For A Green Economy</h2>
+						{% elif request.get_full_path ==  "/community/press/" %}
+							<h2 class="text-center green-text">GreenWave In The News</h2>
+						{% elif request.get_full_path ==  "/blog/" %}
+
+						{% elif request.get_full_path ==  "/support/" %}
+							<h2 class="text-center green-text">Jumpstart Local Economies. Invest In Our Ecosystems.</h2>
+								<div class="row">
+									<div class="col-xs-3 gray-border">
+										<a href=""><h3>Partner With Greenwave</h3></a>
+									</div>
+									<div class="col-xs-3 col-xs-offset-1 gray-border">
+										<a href=""><h3>Help Fund Innovation</h3></a>
+									</div>
+									<div class="col-xs-3 col-xs-offset-1 gray-border">
+										<a href=""><h3>Invite Us To Present</h3></a>
+									</div>
+								</div>
+						{% elif request.get_full_path ==  "/support/partners/" %}
+							<h2 class="text-center green-text">Become A GreenWave Partner</h2>
+						{% elif request.get_full_path ==  "/support/supporters/" %}
+							<h2 class="text-center green-text">Donate To GreenWave</h2>
+						{% elif request.get_full_path ==  "/support/fishers/" %}
+							<h2 class="text-center green-text">Invite GreenWave To Present</h2>
+						{% else %}
+
+						<h2 class="text-center green-text">{% block title %}{% endblock %}</h2>
+
+						{% endif %}
+				</div>
+			</div><!-- /row -->
+    </div> <!-- /container -->
+</div> <!-- pg-header -->
+{% endblock %}
+<div class="container">
+
+	{% nevercache %}
+		{% if messages %}
+		<div class="messages">
+			{% for message in messages %}
+				<div class="alert alert-dismissable alert-{{ message.tags }}" data-alert="alert">
+				    <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+				    {{ message }}
+				</div>
+			{% endfor %}
+		</div>
+		{% endif %}
+	{% endnevercache %}
+</div>
+
+
+{% block all_content%}
+	<div class="container">
+		<div class="row">
+			{% block left_wrapper%}
+				<div class="col-md-{% block left_width %}2{% endblock %} left">
+				    {% block left_panel %}
+				    <div class="panel panel-default tree">{% page_menu "pages/menus/tree.html" %}</div>
+				    {% endblock %}
+				</div>
+			{% endblock %}
+
+			{% block right_wrapper%}
+				<div class="col-md-10 col-md-offset-1">
+				    {% nevercache %}
+				    {% include "includes/user_panel.html" %}
+				    {% endnevercache %}
+				  
+				    {% block right_panel %}
+				    {% ifinstalled mezzanine.twitter %}
+				    {% include "twitter/tweets.html" %}
+				    {% endifinstalled %}
+				    {% endblock %}
+				    
+				</div>
+			{% endblock %}
+			{% block main_wrapper%}
+				<div class="col-md-10 col-md-offset-1">
+				    {% block main %}{% endblock %}
+				</div>
+			{% endblock %}
+			
+
+		</div><!-- /row -->
+	</div> <!-- /container -->
+{% endblock %}
+</div> <!-- /main -->
+<div id="footerwrap">
+	<div class="container">
+		<div class="row">
+			<div class="col-lg-4">
+				<a class="logo" href="/"><img src="{% static "img/logo.png" %}"></a>
+				<p>Brief synopsis of the value added by this aspect of GreenWaves efforts</p>
+				<p>Join the exciting innovation at GreenWave! <a href="">Sign up</a> for our newsletter and receive news and updates.</p>
+		 		<!-- {% page_menu "pages/menus/footer.html" %} -->
+			</div>
+			<div class="col-lg-4">
+				<h4>Social Links</h4>
+				<div class="hline-w"></div>
+				<p>
+					<a href="#"><i class="fa fa-dribbble"></i></a>
+					<a href="#"><i class="fa fa-facebook"></i></a>
+					<a href="#"><i class="fa fa-twitter"></i></a>
+					<a href="#"><i class="fa fa-instagram"></i></a>
+					<a href="#"><i class="fa fa-tumblr"></i></a>
+				</p>
+			</div>
+			<div class="col-lg-4">
+				<!-- <h4>Our Bunker</h4>
+				<div class="hline-w"></div>
+				<p>
+					Some Ave, 987,<br/>
+					23890, New York,<br/>
+					United States.<br/> -->
+					{% load mezzanine_tags i18n future %}
+					<form action="{% url "search" %}" class="navbar-form" role="search">
+
+					<div class="form-group">
+					    <input class="form-control" placeholder="{% trans "Search" %}" type="text" name="q" value="{{ request.REQUEST.q }}">
+					</div>
+
+					{% if search_model_choices %}
+					    {% if search_model_choices|length == 1 %}
+					    <input type="hidden" name="type" value="{{ search_model_choices.0.1 }}">
+					    {% else %}
+					    <div class="form-group">
+					    <select class="form-control" name="type">
+					        <option value="">{% trans "Everything" %}</option>
+					        {% for verbose_name, model in search_model_choices %}
+					        <option value="{{ model }}"
+					            {% if model == request.REQUEST.type  %}selected{% endif %}>
+					            {{ verbose_name }}
+					        </option>
+					        {% endfor %}
+					    </select>
+					    </div>
+					    {% endif %}
+					{% endif %}
+
+					<input type="submit" class="btn btn-default" value="{% trans "Go" %}">
+
+					</form>
+
+				</p>
+			</div>	
+		</div> <!-- /row -->
+
+	<!-- <div class="row">
+		<p class="site-info text-center">
+		    {% trans "Template by" %}
+		    <a href="http://www.blacktie.co">Blacktie</a>
+		    {% trans "Mezzanine theme by" %}
+		    <a href="http://thecodinghouse.in">CodingHouse</a>
+		    
+		</p>
+	</div> -->
+	</div> <!-- /container -->
+</div> <!-- /footerwrap -->
+<!-- Core JavaScript Files -->
+  
+    
+     <!-- Placed at the end of the document so the pages load faster -->
+   
+  <script src="{% static "js/jquery.flexslider-min.js" %}"></script> 
+	<script src="{% static "js/retina-1.1.0.js" %}"></script>
+	<script src="{% static "js/jquery.hoverdir.js" %}"></script>
+	<script src="{% static "js/jquery.hoverex.min.js" %}"></script>
+	<script src="{% static "js/jquery.prettyPhoto.js" %}"></script>
+  
+  <script src="{% static "js/jquery.isotope.min.js" %}"></script>
+ 	<script src="{% static "js/custom.js" %}"></script>
+  	
+  	    <script>
+// Portfolio
+(function($) {
+	"use strict";
+	var $container = $('.portfolio'),
+		$items = $container.find('.portfolio-item'),
+		portfolioLayout = 'fitRows';
+		
+		if( $container.hasClass('portfolio-centered') ) {
+			portfolioLayout = 'masonry';
+		}
+				
+		$container.isotope({
+			filter: '*',
+			animationEngine: 'best-available',
+			layoutMode: portfolioLayout,
+			animationOptions: {
+			duration: 750,
+			easing: 'linear',
+			queue: false
+		},
+		masonry: {
+		}
+		}, refreshWaypoints());
+		
+		function refreshWaypoints() {
+			setTimeout(function() {
+			}, 1000);   
+		}
+				
+		$('nav.portfolio-filter ul a').on('click', function() {
+				var selector = $(this).attr('data-filter');
+				$container.isotope({ filter: selector }, refreshWaypoints());
+				$('nav.portfolio-filter ul a').removeClass('active');
+				$(this).addClass('active');
+				return false;
+		});
+		
+		function getColumnNumber() { 
+			var winWidth = $(window).width(), 
+			columnNumber = 1;
+		
+			if (winWidth > 1200) {
+				columnNumber = 5;
+			} else if (winWidth > 950) {
+				columnNumber = 4;
+			} else if (winWidth > 600) {
+				columnNumber = 3;
+			} else if (winWidth > 400) {
+				columnNumber = 2;
+			} else if (winWidth > 250) {
+				columnNumber = 1;
+			}
+				return columnNumber;
+			}       
+			
+			function setColumns() {
+				var winWidth = $(window).width(), 
+				columnNumber = getColumnNumber(), 
+				itemWidth = Math.floor(winWidth / columnNumber);
+				
+				$container.find('.portfolio-item').each(function() { 
+					$(this).css( { 
+					width : itemWidth + 'px' 
+				});
+			});
+		}
+		
+		function setPortfolio() { 
+			setColumns();
+			$container.isotope('reLayout');
+		}
+			
+		$container.imagesLoaded(function () { 
+			setPortfolio();
+		});
+		
+		$(window).on('resize', function () { 
+		setPortfolio();          
+	});
+})(jQuery);
+
+
+
+// Sticky navigation
+var mn = $(".main-nav");
+    mns = "main-nav-scrolled";
+    hdr = $('header').height();
+
+$(window).scroll(function() {
+  if( $(this).scrollTop() > hdr ) {
+    mn.addClass(mns);
+  } else {
+    mn.removeClass(mns);
+  }
+});
+
+// Can also be used with $(document).ready()
+$(window).load(function() {
+  $('.flexslider').flexslider({
+    animation: "slide"
+  });
+});
+
+// Remove Home from navbar
+var dmh = document.getElementById("dropdown-menu-home");
+		dmh.parentNode.removeChild(dmh);
+
+</script>
+
+</body>
+</html>
