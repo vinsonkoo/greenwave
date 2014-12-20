@@ -60,22 +60,24 @@
 <body id="{% block body_id %}page-top{% endblock %}">
 {% block intro %}
 <header>
-	<div class="col-lg-8 col-lg-offset-2">
+	<section class="hdr-section">
 		<div class="flexslider">
 	    <ul class="slides">
 	    	<li>
-    	    <img src="{% static "img/slide01.jpg" %}" class="">
-    		</li>
-    		<li>
-    	    <img src="{% static "img/slide02.jpg" %}" class="">
-    		</li>
-    		<li>
-    	    <img src="{% static "img/slide03.jpg" %}" class="">
-    		</li>
+	  	    <img src="{% static "img/slide01.jpg" %}" class="">
+	  		</li>
+	  		<li>
+	  	    <img src="{% static "img/slide02.jpg" %}" class="">
+	  		</li>
+	  		<li>
+	  	    <img src="{% static "img/slide03.jpg" %}" class="">
+	  		</li>
 	    </ul>
 	  </div>
-	</div>
+	</section>
 </header>
+
+
 
 {% endblock %}
 
@@ -293,6 +295,8 @@
   
   <script src="{% static "js/jquery.isotope.min.js" %}"></script>
  	<script src="{% static "js/custom.js" %}"></script>
+ 	<script src="{% static "js/jq-sticky-anything.min.js" %}"></script>
+
   	
   	    <script>
 // Portfolio
@@ -377,30 +381,17 @@
 })(jQuery);
 
 
-
-// Sticky navigation
-var mn = $(".main-nav");
-    mns = "main-nav-scrolled";
-    hdr = $('header').height();
-
-$(window).scroll(function() {
-  if( $(this).scrollTop() > hdr ) {
-    mn.addClass(mns);
-  } else {
-    mn.removeClass(mns);
-  }
-});
-
-// Can also be used with $(document).ready()
 $(window).load(function() {
   $('.flexslider').flexslider({
     animation: "slide"
   });
 });
-
 // Remove Home from navbar
 var dmh = document.getElementById("dropdown-menu-home");
 		dmh.parentNode.removeChild(dmh);
+$('.main-nav').stickThis();
+
+
 
 </script>
 
